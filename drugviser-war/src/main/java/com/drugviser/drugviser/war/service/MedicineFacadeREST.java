@@ -21,6 +21,7 @@ import javax.ws.rs.core.MediaType;
  * @author caracciobreno
  */
 @Stateless
+// NOTE: access using localhost:8080/services/medicine
 @Path("/medicine")
 public class MedicineFacadeREST extends AbstractFacade<Medicine> {
 
@@ -59,25 +60,25 @@ public class MedicineFacadeREST extends AbstractFacade<Medicine> {
     }
 
     @GET
-    @Override
+//    @Override
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public List<Medicine> findAll() {
-        return super.findAll();
+    public String findAll() {
+        return "<html>FUNCIONOU</html>";
     }
-
-    @GET
-    @Path("{from}/{to}")
-    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public List<Medicine> findRange(@PathParam("from") Integer from, @PathParam("to") Integer to) {
-        return super.findRange(new int[]{from, to});
-    }
-
-    @GET
-    @Path("count")
-    @Produces(MediaType.TEXT_PLAIN)
-    public String countREST() {
-        return String.valueOf(super.count());
-    }
+//
+//    @GET
+//    @Path("{from}/{to}")
+//    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+//    public List<Medicine> findRange(@PathParam("from") Integer from, @PathParam("to") Integer to) {
+//        return super.findRange(new int[]{from, to});
+//    }
+//
+//    @GET
+//    @Path("count")
+//    @Produces(MediaType.TEXT_PLAIN)
+//    public String countREST() {
+//        return String.valueOf(super.count());
+//    }
 
     @Override
     protected EntityManager getEntityManager() {

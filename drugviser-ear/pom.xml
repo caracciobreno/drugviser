@@ -16,6 +16,8 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <wf.windows>C:\Users\Breno Caraccio\Documents\NetBeansProjects\wildfly-11.0.0.Final\standalone\deployments</wf.windows>
+        <wf.mac>/Users/caracciobreno/Development/wildfly-11.0.0.Beta1/standalone/deployments</wf.mac>
     </properties>
   
     <build>
@@ -28,7 +30,7 @@
                     <followSymLinks>false</followSymLinks>
                     <filesets>
                         <fileset>
-                            <directory>/Users/caracciobreno/Development/wildfly-11.0.0.Beta1/standalone/deployments</directory>
+                            <directory>${wf.windows}</directory>
                             <includes>
                                 <include>**/*</include>
                             </includes>
@@ -60,7 +62,7 @@
                             <artifactId>drugviser-war</artifactId>
                             <uri>drugviser.war</uri>
                             <bundleFileName>drugviser.war</bundleFileName>
-                            <contextRoot>/ws</contextRoot>
+                            <contextRoot>/</contextRoot>
                         </webModule>
                     </modules>
                 </configuration>
