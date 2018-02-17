@@ -7,11 +7,11 @@
     <packaging>pom</packaging>
     <name>drugviser</name>
     <modules>
-        <module>drugviser-ear</module>
         <module>drugviser-ejb</module>
         <module>drugviser-war</module>
-        <module>drugviser-entity</module>
-    </modules>
+        <module>drugviser-common</module>
+        <module>drugviser-business</module>
+  </modules>
     <properties>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>

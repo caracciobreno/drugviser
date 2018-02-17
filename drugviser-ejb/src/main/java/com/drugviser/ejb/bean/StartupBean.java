@@ -1,4 +1,4 @@
-package com.drugviser;
+package com.drugviser.ejb.bean;
 
 import java.util.concurrent.atomic.AtomicBoolean;
 import javax.annotation.PostConstruct;

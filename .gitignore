@@ -24,3 +24,5 @@ hs_err_pid*
 /drugviser-ear/target/
 /drugviser-entity/target/
 /drugviser-war/target/
+/drugviser-common/target/
+/drugviser-business/target/

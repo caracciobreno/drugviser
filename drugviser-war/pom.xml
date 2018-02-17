@@ -12,12 +12,25 @@
     <properties>
         <endorsed.dir>${project.build.directory}/endorsed</endorsed.dir>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <wf.windows>C:\Users\Breno Caraccio\Documents\NetBeansProjects\wildfly-11.0.0.Final\standalone\deployments</wf.windows>
+        <wf.mac>/Users/caracciobreno/Development/wildfly-11.0.0.Beta1/standalone/deployments</wf.mac>
     </properties>
     
     <dependencies>
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>drugviser-entity</artifactId>
+            <artifactId>drugviser-common</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>drugviser-business</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>drugviser-ejb</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>
@@ -26,10 +39,39 @@
             <version>7.0</version>
             <scope>provided</scope>
         </dependency>
+        
+        <dependency>
+            <groupId>javax</groupId>
+            <artifactId>javaee-api</artifactId>
+            <version>7.0</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>javax.enterprise</groupId>
+            <artifactId>cdi-api</artifactId>
+            <version>1.1</version>
+            <scope>provided</scope>
+        </dependency>
     </dependencies>
 
     <build>
         <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-clean-plugin</artifactId>
+                <version>3.0.0</version>
+                <configuration>
+                    <followSymLinks>false</followSymLinks>
+                    <filesets>
+                        <fileset>
+                            <directory>${wf.windows}</directory>
+                            <includes>
+                                <include>**/*</include>
+                            </includes>
+                        </fileset>
+                    </filesets>
+                </configuration>
+            </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -45,7 +87,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-war-plugin</artifactId>
-                <version>2.3</version>
+                <version>3.2.0</version>
                 <configuration>
                     <warName>drugviser</warName>
                     <failOnMissingWebXml>false</failOnMissingWebXml>
