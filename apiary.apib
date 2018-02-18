@@ -1,0 +1,24 @@
+FORMAT: 1A
+HOST: http://drugviser.com/services/
+
+# DrugViser
+
+DrugViser is a simple API allowing consumers to retrieve drug interactions between N drugs.
+
+DrugViser use data from the National Library of Medicine (NLH), acting as an intermediate to retrieve desired information
+from the NLH RxNORM API.
+
+## Drug Interactions [/drugs/interactions/{shortName}]
+
+### List Drug Interactions [GET]
+
++ Parameters
+    + shortName - A drug short name. If typo, the API will try to relate it to another drug name.
+
++ Response 200 (application/json)
+
+            {
+                "rxcui": 15000,
+                "shortName": "Morphine",
+                "description": "Strong painkiller"
+            }
