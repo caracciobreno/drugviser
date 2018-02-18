@@ -22,7 +22,7 @@ public class DrugServicesBean implements DrugServices {
         Drug drug = new Drug();
         drug.setDescription("teste description");
         drug.setRxcui(15000L);
-        drug.setShortName("teste");
+        drug.setShortName(shortName);
 
         return drug;
     }

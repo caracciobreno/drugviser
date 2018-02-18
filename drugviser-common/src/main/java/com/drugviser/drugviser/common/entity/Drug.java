@@ -1,15 +1,11 @@
 package com.drugviser.drugviser.common.entity;
 
-import java.io.Serializable;
-import javax.xml.bind.annotation.XmlRootElement;
-
 /**
  * Drug entity.
  *
  * @author caracciobreno
  */
-@XmlRootElement
-public class Drug implements Serializable {
+public class Drug {
 
     private long rxcui;
 

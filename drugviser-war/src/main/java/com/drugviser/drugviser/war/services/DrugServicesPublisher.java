@@ -10,7 +10,7 @@ import com.drugviser.ejb.bean.DrugServicesBean;
  *
  * @author Breno Caraccio
  */
-public class DrugResourcesPublisher implements DrugServicesWebResource {
+public class DrugServicesPublisher implements DrugServicesWebResource {
 
     /**
      * Delegate object to process requests.
