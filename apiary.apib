@@ -1,80 +1,24 @@
 FORMAT: 1A
-HOST: http://polls.apiblueprint.org/
+HOST: http://drugviser.com/services/
 
-# drugvsier
+# DrugViser
 
-Polls is a simple API allowing consumers to view polls and vote in them.
+DrugViser is a simple API allowing consumers to retrieve drug interactions between N drugs.
 
-## Questions Collection [/questions]
+DrugViser use data from the National Library of Medicine (NLH), acting as an intermediate to retrieve desired information
+from the NLH RxNORM API.
 
-### List All Questions [GET]
+## Drug Interactions [/drugs/interactions/{shortName}]
+
+### List Drug Interactions [GET]
+
++ Parameters
+    + shortName - A drug short name. If typo, the API will try to relate it to another drug name.
 
 + Response 200 (application/json)
 
-        [
             {
-                "question": "Favourite programming language?",
-                "published_at": "2015-08-05T08:40:51.620Z",
-                "choices": [
-                    {
-                        "choice": "Swift",
-                        "votes": 2048
-                    }, {
-                        "choice": "Python",
-                        "votes": 1024
-                    }, {
-                        "choice": "Objective-C",
-                        "votes": 512
-                    }, {
-                        "choice": "Ruby",
-                        "votes": 256
-                    }
-                ]
-            }
-        ]
-
-### Create a New Question [POST]
-
-You may create your own question using this action. It takes a JSON
-object containing a question and a collection of answers in the
-form of choices.
-
-+ Request (application/json)
-
-        {
-            "question": "Favourite programming language?",
-            "choices": [
-                "Swift",
-                "Python",
-                "Objective-C",
-                "Ruby"
-            ]
-        }
-
-+ Response 201 (application/json)
-
-    + Headers
-
-            Location: /questions/2
-
-    + Body
-
-            {
-                "question": "Favourite programming language?",
-                "published_at": "2015-08-05T08:40:51.620Z",
-                "choices": [
-                    {
-                        "choice": "Swift",
-                        "votes": 0
-                    }, {
-                        "choice": "Python",
-                        "votes": 0
-                    }, {
-                        "choice": "Objective-C",
-                        "votes": 0
-                    }, {
-                        "choice": "Ruby",
-                        "votes": 0
-                    }
-                ]
+                "rxcui": 15000,
+                "shortName": "Morphine",
+                "description": "Strong painkiller"
             }
