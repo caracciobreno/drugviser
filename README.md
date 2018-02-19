@@ -6,4 +6,4 @@ The project itself is a Java EE Application, deployed onto WildFly 11.0.0 Applic
 This project is built for academic purposes, and may be or may be not turned into a product in the future.
 
 # API Documentation
-https://drugvsier.docs.apiary.io
+https://drugviser.docs.apiary.io/
