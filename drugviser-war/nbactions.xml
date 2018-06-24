@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<actions>
+        <action>
+            <actionName>CUSTOM-swarm</actionName>
+            <displayName>swarm</displayName>
+            <goals>
+                <goal>wildfly-swarm:run</goal>
+            </goals>
+        </action>
+    </actions>
