@@ -23,7 +23,7 @@ public class StartupBean {
     /**
      * Maintain the server up status.
      */
-    private static AtomicBoolean INITIALIZED_SERVER_STATE = new AtomicBoolean();
+    private static final AtomicBoolean INITIALIZED_SERVER_STATE = new AtomicBoolean();
 
     /**
      * Initializes everything up.

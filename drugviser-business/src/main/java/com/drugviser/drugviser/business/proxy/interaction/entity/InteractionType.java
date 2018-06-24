@@ -1,4 +1,4 @@
-package com.drugviser.drugviser.business.proxy.entity.interaction;
+package com.drugviser.drugviser.business.proxy.interaction.entity;
 
 import java.util.List;
 

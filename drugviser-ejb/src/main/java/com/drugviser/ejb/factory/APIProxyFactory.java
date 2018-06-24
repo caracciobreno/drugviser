@@ -1,10 +1,14 @@
 package com.drugviser.ejb.factory;
 
 import org.jboss.resteasy.client.jaxrs.ResteasyClientBuilder;
-import com.drugviser.drugviser.business.proxy.NLMInteractionAPI;
+import com.drugviser.drugviser.business.proxy.interaction.NLMInteractionAPI;
 
 /**
  * Factory for API proxy creation.
+ *
+ * @apiNote An API proxy is basically an interface that describes the Path, the
+ * params and the return for an external provided REST API. By using a proxied
+ * API, you invoke the REST service using easy-to-read java calls.
  *
  * @author Breno Caraccio
  */
