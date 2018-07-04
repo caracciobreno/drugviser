@@ -1,6 +1,6 @@
 package com.drugviser.drugviser.business;
 
-import com.drugviser.drugviser.common.entity.Drug;
+import javax.ws.rs.core.Response;
 
 /**
  * Defines the provided Services for the "Drug" Resource.
@@ -16,5 +16,5 @@ public interface DrugServices {
      *
      * @return Object containing all the drug interactions info.
      */
-    public Drug findInteractions(String shortName);
+    public Response findInteractions(String shortName);
 }

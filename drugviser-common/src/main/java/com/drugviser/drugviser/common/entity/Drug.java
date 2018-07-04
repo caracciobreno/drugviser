@@ -11,7 +11,16 @@ public class Drug {
 
     private long rxcui;
 
-    private String shortName;
+    private String inputName;
+
+    private String rxName;
+
+    private boolean approximated;
+
+    private final String disclaimer = (""
+            + " It is not the intention of DrugViser to provide specific medical advice, but rather to provide users\n"
+            + " with information to better understand their health and their medications. DrugViser doesn't fabricate any information, everything is\n"
+            + " gathered from NLM API's.").trim();
 
     private List<DrugInteraction> interactions;
 
@@ -79,12 +88,32 @@ public class Drug {
         this.rxcui = rxcui;
     }
 
-    public String getShortName() {
-        return shortName;
+    public String getInputName() {
+        return inputName;
     }
 
-    public void setShortName(String shortName) {
-        this.shortName = shortName;
+    public void setInputName(String inputName) {
+        this.inputName = inputName;
+    }
+
+    public String getRxName() {
+        return rxName;
+    }
+
+    public void setRxName(String rxName) {
+        this.rxName = rxName;
+    }
+
+    public boolean isApproximated() {
+        return approximated;
+    }
+
+    public void setApproximated(boolean approximated) {
+        this.approximated = approximated;
+    }
+
+    public String getDisclaimer() {
+        return disclaimer;
     }
 
     public List<DrugInteraction> getInteractions() {

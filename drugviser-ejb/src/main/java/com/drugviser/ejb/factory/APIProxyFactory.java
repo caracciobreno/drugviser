@@ -1,7 +1,8 @@
 package com.drugviser.ejb.factory;
 
-import org.jboss.resteasy.client.jaxrs.ResteasyClientBuilder;
 import com.drugviser.drugviser.business.proxy.interaction.NLMInteractionAPI;
+import com.drugviser.drugviser.business.proxy.rxcui.NLMRxNormAPI;
+import org.jboss.resteasy.client.jaxrs.ResteasyClientBuilder;
 
 /**
  * Factory for API proxy creation.
@@ -25,6 +26,15 @@ public final class APIProxyFactory {
      */
     public static NLMInteractionAPI createNLMInteractionAPI() {
         return getProxy(NLMInteractionAPI.class, "https://rxnav.nlm.nih.gov/");
+    }
+
+    /**
+     * Creates a proxy for the NLM RxNorm API.
+     *
+     * @return RestEasy Proxy instance of {@link NLMRxNormAPI}.
+     */
+    public static NLMRxNormAPI createNLMRxNormAPI() {
+        return getProxy(NLMRxNormAPI.class, "https://rxnav.nlm.nih.gov/");
     }
 
     /**

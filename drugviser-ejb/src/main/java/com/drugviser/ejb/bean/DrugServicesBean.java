@@ -3,16 +3,22 @@ package com.drugviser.ejb.bean;
 import com.drugviser.drugviser.common.entity.Drug;
 import javax.ejb.Stateless;
 import com.drugviser.drugviser.business.DrugServices;
-import com.drugviser.drugviser.business.proxy.interaction.entity.InteractionJSON;
-import com.drugviser.ejb.factory.APIProxyFactory;
-import javax.ejb.LocalBean;
 import com.drugviser.drugviser.business.proxy.interaction.NLMInteractionAPI;
 import com.drugviser.drugviser.business.proxy.interaction.entity.InteractionConcept;
+import com.drugviser.drugviser.business.proxy.interaction.entity.InteractionResponse;
 import com.drugviser.drugviser.business.proxy.interaction.entity.InteractionPair;
 import com.drugviser.drugviser.business.proxy.interaction.entity.InteractionType;
 import com.drugviser.drugviser.business.proxy.interaction.entity.InteractionTypeGroup;
+import com.drugviser.drugviser.business.proxy.rxcui.NLMRxNormAPI;
+import com.drugviser.drugviser.business.proxy.rxcui.entity.ApproximateTermResponse;
+import com.drugviser.drugviser.business.proxy.rxcui.entity.Candidate;
+import com.drugviser.drugviser.business.proxy.rxcui.entity.RxCUIResponse;
+import com.drugviser.ejb.factory.APIProxyFactory;
+import javax.ejb.LocalBean;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
+import javax.ws.rs.core.Response;
 
 /**
  * Stateless Session Bean for the "Drug" Resources.
@@ -27,13 +33,61 @@ public class DrugServicesBean implements DrugServices {
      * {@inheritDoc}.
      */
     @Override
-    public Drug findInteractions(String shortName) {
+    public Response findInteractions(String shortName) {
 
-        NLMInteractionAPI proxy = APIProxyFactory.createNLMInteractionAPI();
+        long rxcui;
+        boolean approximated;
 
-        // TODO: search NLM API to find the RXCUI of "shortName" and use it
-        // TODO: treat response code
-        InteractionJSON interactionResponse = proxy.interaction(88014, null);
+        NLMRxNormAPI rxNormProxy = APIProxyFactory.createNLMRxNormAPI();
+
+        RxCUIResponse rxcuiResponse = rxNormProxy.rxcui(shortName);
+
+        // Approximate search
+        if (rxcuiResponse.getIdGroup().getRxnormId() == null
+                || rxcuiResponse.getIdGroup().getRxnormId().isEmpty()) {
+
+            ApproximateTermResponse approximateTermResponse
+                    = rxNormProxy.approximateTerm(shortName, null);
+
+            if (approximateTermResponse == null
+                    || approximateTermResponse.getApproximateGroup() == null
+                    || approximateTermResponse.getApproximateGroup().getCandidate() == null
+                    || approximateTermResponse.getApproximateGroup().getCandidate().isEmpty()) {
+
+                return Response.status(Response.Status.NOT_FOUND)
+                        .entity("Couldn't find a drug for identifier '" + shortName + "'")
+                        .build();
+            }
+
+            // Gets the rank 1 candidate
+            Candidate candidate = approximateTermResponse.getApproximateGroup().getCandidate()
+                    .stream()
+                    .min(Comparator.comparing(Candidate::getRank))
+                    .get();
+
+            // Rejects if the score's bellow 30
+            if (Integer.parseInt(candidate.getScore()) <= 30) {
+                return Response.status(Response.Status.NOT_FOUND)
+                        .entity("Couldn't find a drug for identifier '" + shortName + "'")
+                        .build();
+            }
+
+            rxcui = Long.parseLong(candidate.getRxcui());
+            approximated = true;
+
+        } // Matches exactly
+        else {
+            rxcui = Long.parseLong(
+                    rxcuiResponse.getIdGroup().getRxnormId().get(0));
+
+            approximated = false;
+        }
+
+        NLMInteractionAPI interactionProxy = APIProxyFactory
+                .createNLMInteractionAPI();
+
+        InteractionResponse interactionResponse = interactionProxy.interaction(
+                rxcui, null);
 
         // As we force 1 source, there's only 1 type group
         InteractionTypeGroup interactionTypeGroup = interactionResponse
@@ -47,8 +101,10 @@ public class DrugServicesBean implements DrugServices {
         Drug drug = new Drug();
         drug.setRxcui(
                 Long.parseLong(interactionResponse.getUserInput().getRxcui()));
-        drug.setShortName(shortName);
+        drug.setInputName(shortName);
+        drug.setRxName(interactionType.getMinConceptItem().getName());
         drug.setInteractions(new ArrayList<>());
+        drug.setApproximated(approximated);
 
         for (InteractionPair interactionPair : interactionType.getInteractionPair()) {
 
@@ -70,6 +126,6 @@ public class DrugServicesBean implements DrugServices {
             drug.getInteractions().add(interaction);
         }
 
-        return drug;
+        return Response.ok(drug).build();
     }
 }

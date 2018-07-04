@@ -1,6 +1,6 @@
 package com.drugviser.drugviser.business.proxy.interaction;
 
-import com.drugviser.drugviser.business.proxy.interaction.entity.InteractionJSON;
+import com.drugviser.drugviser.business.proxy.interaction.entity.InteractionResponse;
 import javax.ws.rs.DefaultValue;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -21,6 +21,9 @@ public interface NLMInteractionAPI {
     /**
      * Gets the Drug interactions for the given drug.
      *
+     * @apiNote References
+     * https://rxnav.nlm.nih.gov/InteractionAPIs.html#uLink=Interaction_REST_findDrugInteractions
+     *
      * @param rxcui RxNorm concept ID for the given drug.
      * @param sources The Source to use, can be: "DrugBank" or "ONCHigh".
      *
@@ -29,7 +32,7 @@ public interface NLMInteractionAPI {
     @GET
     @Path("interaction.json")
     @Produces(MediaType.APPLICATION_JSON)
-    public InteractionJSON interaction(
+    public InteractionResponse interaction(
             @QueryParam("rxcui") long rxcui,
             @QueryParam("sources") @DefaultValue("DrugBank") String sources
     );

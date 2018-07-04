@@ -1,9 +1,9 @@
 package com.drugviser.drugviser.war.services;
 
-import com.drugviser.drugviser.common.entity.Drug;
 import javax.inject.Inject;
 import com.drugviser.drugviser.business.resources.DrugServicesWebResource;
 import com.drugviser.ejb.bean.DrugServicesBean;
+import javax.ws.rs.core.Response;
 
 /**
  * Publisher for the Resource "Drug".
@@ -22,7 +22,7 @@ public class DrugServicesPublisher implements DrugServicesWebResource {
      * {@inheritDoc}.
      */
     @Override
-    public Drug findInteractions(String shortName) {
+    public Response findInteractions(String shortName) {
         return delegate.findInteractions(shortName);
     }
 }

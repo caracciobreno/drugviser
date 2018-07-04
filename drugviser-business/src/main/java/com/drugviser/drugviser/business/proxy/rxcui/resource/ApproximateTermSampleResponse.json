@@ -1,0 +1,21 @@
+{  
+   "approximateGroup":{  
+      "inputTerm":"zocor 10 mg",
+      "maxEntries":"4",
+      "comment":null,
+      "candidate":[  
+         {  
+            "rxcui":"104490",
+            "rxaui":"2651386",
+            "score":"75",
+            "rank":"1"
+         },
+         {  
+            "rxcui":"563653",
+            "rxaui":"2278986",
+            "score":"75",
+            "rank":"1"
+         }
+      ]
+   }
+}

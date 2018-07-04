@@ -1,12 +1,12 @@
 package com.drugviser.drugviser.business.resources;
 
-import com.drugviser.drugviser.common.entity.Drug;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import com.drugviser.drugviser.business.DrugServices;
 import javax.ws.rs.PathParam;
+import javax.ws.rs.core.Response;
 
 /**
  * REST Service "Drug".
@@ -24,5 +24,5 @@ public interface DrugServicesWebResource extends DrugServices {
     @Path("interactions/{shortName}")
     @Produces(MediaType.APPLICATION_JSON)
     @Override
-    public Drug findInteractions(@PathParam("shortName") String shortName);
+    public Response findInteractions(@PathParam("shortName") String shortName);
 }

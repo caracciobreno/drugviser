@@ -2,7 +2,7 @@ package com.drugviser.drugviser.business.proxy.interaction.entity;
 
 import java.util.List;
 
-public class InteractionJSON {
+public class InteractionResponse {
 
     private String nlmDisclaimer;
     private UserInput userInput;
